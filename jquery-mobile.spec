@@ -1,5 +1,5 @@
 %define		plugin	mobile
-%define		subver	a4.1
+%define		subver	rc1
 %define		rel		1
 Summary:	jQuery Mobile: Touch-Optimized Web Framework for Smartphones & Tablets
 Name:		jquery-%{plugin}
@@ -8,7 +8,7 @@ Release:	0.%{subver}.%{rel}
 License:	MIT / GPL v2
 Group:		Applications/WWW
 Source0:	http://code.jquery.com/mobile/%{version}%{subver}/jquery.mobile-%{version}%{subver}.zip
-# Source0-md5:	92fa39077c49d25d6a319ebf20fbfe0f
+# Source0-md5:	ddb843aad9da5446463275e96784527f
 URL:		http://jquerymobile.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	jquery
@@ -30,8 +30,15 @@ flexible, easily themeable design.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_appdir}
 cp -a images $RPM_BUILD_ROOT%{_appdir}
-cp -p jquery.mobile-*.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.js
-cp -p jquery.mobile-*.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.css
+# install minified and original css/js
+cp -p jquery.mobile-%{version}%{subver}.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.min.js
+cp -p jquery.mobile-%{version}%{subver}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.min.css
+cp -p jquery.mobile-%{version}%{subver}.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.js
+cp -p jquery.mobile-%{version}%{subver}.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.css
+
+# versionless symlinks, to minified version
+ln -s %{plugin}-%{version}.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.js
+ln -s %{plugin}-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.css
 
 %clean
 rm -rf $RPM_BUILD_ROOT
