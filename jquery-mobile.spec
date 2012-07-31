@@ -1,12 +1,12 @@
 %define		plugin	mobile
 Summary:	jQuery Mobile: Touch-Optimized Web Framework for Smartphones & Tablets
 Name:		jquery-%{plugin}
-Version:	1.0.1
+Version:	1.1.0
 Release:	1
 License:	MIT / GPL v2
 Group:		Applications/WWW
 Source0:	http://code.jquery.com/mobile/%{version}/jquery.mobile-%{version}.zip
-# Source0-md5:	b5ec71bd776a54ea62f5cf51e4229c25
+# Source0-md5:	e1fbf181fc9429ae1c1023855f71fa32
 URL:		http://jquerymobile.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	jquery
@@ -31,6 +31,8 @@ mv jquery.mobile{-%{version},}.js
 mv jquery.mobile{-%{version},}.css
 mv jquery.mobile.structure{-%{version},}.css
 mv jquery.mobile.structure{-%{version},}.min.css
+mv jquery.mobile.theme{-%{version},}.css
+mv jquery.mobile.theme{-%{version},}.min.css
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -41,13 +43,18 @@ cp -p jquery.mobile.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.min.js
 cp -p jquery.mobile.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.min.css
 cp -p jquery.mobile.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.js
 cp -p jquery.mobile.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}-%{version}.css
-cp -p jquery.mobile.structure.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.structure-%{version}.min.css
 cp -p jquery.mobile.structure.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.structure-%{version}.css
+cp -p jquery.mobile.structure.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.structure-%{version}.min.css
+cp -p jquery.mobile.theme.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.theme-%{version}.css
+cp -p jquery.mobile.theme.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.theme-%{version}.min.css
 
 # versionless symlinks, to minified version
 ln -s %{plugin}-%{version}.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.js
+ln -s %{plugin}-%{version}.min.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.min.js
+ln -s %{plugin}-%{version}.js $RPM_BUILD_ROOT%{_appdir}/%{plugin}.src.js
 ln -s %{plugin}-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.css
 ln -s %{plugin}.structure-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.structure.css
+ln -s %{plugin}.theme-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.theme.css
 
 %clean
 rm -rf $RPM_BUILD_ROOT
