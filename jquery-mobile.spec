@@ -1,14 +1,15 @@
 %define		plugin	mobile
 Summary:	jQuery Mobile: Touch-Optimized Web Framework for Smartphones & Tablets
 Name:		jquery-%{plugin}
-Version:	1.1.0
+Version:	1.2.1
 Release:	1
-License:	MIT / GPL v2
+License:	MIT
 Group:		Applications/WWW
-Source0:	http://code.jquery.com/mobile/%{version}/jquery.mobile-%{version}.zip
-# Source0-md5:	e1fbf181fc9429ae1c1023855f71fa32
+Source0:	http://jquerymobile.com/resources/download/jquery.mobile-%{version}.zip
+# Source0-md5:	3ff763bd769162f0cc33ffc8c55ba558
 URL:		http://jquerymobile.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	unzip
 Requires:	jquery
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -20,6 +21,14 @@ A unified user interface system across all popular mobile device
 platforms, built on the rock-solid jQuery and jQuery UI foundation.
 Its lightweight code is built with progressive enhancement, and has a
 flexible, easily themeable design.
+
+%package demo
+Summary:	Demo for jQuery.mobile
+Group:		Development
+Requires:	%{name} = %{version}-%{release}
+
+%description demo
+Demonstrations and samples for jQuery.mobile.
 
 %prep
 %setup -q -n jquery.mobile-%{version}
@@ -56,9 +65,16 @@ ln -s %{plugin}-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.css
 ln -s %{plugin}.structure-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.structure.css
 ln -s %{plugin}.theme-%{version}.min.css $RPM_BUILD_ROOT%{_appdir}/%{plugin}.theme.css
 
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %{_appdir}
+
+%files demo
+%defattr(644,root,root,755)
+%{_examplesdir}/%{name}-%{version}
