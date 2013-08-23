@@ -1,12 +1,12 @@
 %define		plugin	mobile
 Summary:	jQuery Mobile: Touch-Optimized Web Framework for Smartphones & Tablets
 Name:		jquery-%{plugin}
-Version:	1.2.1
+Version:	1.3.2
 Release:	1
 License:	MIT
 Group:		Applications/WWW
 Source0:	http://jquerymobile.com/resources/download/jquery.mobile-%{version}.zip
-# Source0-md5:	3ff763bd769162f0cc33ffc8c55ba558
+# Source0-md5:	e95ca596323e247759875e89e3ec1f2b
 URL:		http://jquerymobile.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	unzip
@@ -31,7 +31,7 @@ Requires:	%{name} = %{version}-%{release}
 Demonstrations and samples for jQuery.mobile.
 
 %prep
-%setup -q -n jquery.mobile-%{version}
+%setup -qc
 
 # rename for better version diffs
 mv jquery.mobile{-%{version},}.min.js
